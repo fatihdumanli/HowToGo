@@ -12,7 +12,6 @@ namespace UlasimApp.API.Controllers
     {
         private UlasimApp.API.Models.UlasimAppAPIContext db = new Models.UlasimAppAPIContext();
       
-        [HttpPost]
         public ActionResult GetNearbyStops(double lat, double longitude, double distance)
         {
 

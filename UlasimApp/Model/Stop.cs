@@ -12,6 +12,7 @@ namespace UlasimApp.Model
 
         public string From { get; set; }
         public string To { get; set; }
+        public string Name { get; set; }
         public double Longitude { get; set; }
         public string Latitude { get; set; }
 

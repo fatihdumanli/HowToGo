@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UlasimApp.View;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -71,6 +72,8 @@ namespace UlasimApp
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            rootFrame.Navigate(typeof(Dashboard));
         }
 
         /// <summary>

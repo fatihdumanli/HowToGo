@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using UlasimApp.Model;
@@ -12,9 +14,10 @@ namespace UlasimApp.Services
         private const string SERVICE_URL = "http://localhost:49560";
 
 
-        private LocationService() { }
+        private LocationService() { client.BaseAddress = new Uri(SERVICE_URL); }
 
         private static LocationService _instance;
+        private HttpClient client = new HttpClient();
 
         public static LocationService Instance
         {
@@ -24,9 +27,19 @@ namespace UlasimApp.Services
             }
         }
 
-        public IList<Stop> GetNearbyStops(int distance)
+        public async Task<IList<Stop>> GetNearbyStops(double latitude, double longitude, double distance)
         {
+            using(client)
+            {
+                var res = await client.GetStringAsync(String.Format("/Stops/GetNearbyStops?lat={0}&longitude={1}&distance={2}", latitude, longitude, distance));
+                if(res != "[]")
+                {
+                    return JsonConvert.DeserializeObject<List<Stop>>(res);
+                }
+            }
+
             return null;
+            
         }
 
        

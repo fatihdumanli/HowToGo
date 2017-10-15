@@ -13,7 +13,7 @@ namespace UlasimApp.API.Controllers
         public ActionResult GetNearbyStops(double lat, double longitude, double radius)
         {
 
-
+            return null;
 
 
         }

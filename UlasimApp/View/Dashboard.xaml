@@ -44,20 +44,32 @@
             <StackPanel>
                 <TextBlock Text="Nearby Stops" FontSize="26"
                        Padding="10"/>
-                <ListView x:Name="lstView">
+                <ListView x:Name="lstView" ItemClick="lstView_ItemClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
+                                <Interactivity:Interaction.Behaviors>
+                                    <Core:EventTriggerBehavior EventName="Tapped">
+                                        <Core:InvokeCommandAction Command="{Binding CmdInit}"/>
+                                    </Core:EventTriggerBehavior>
+                                </Interactivity:Interaction.Behaviors>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="10*"></ColumnDefinition>
-                                    <ColumnDefinition Width="90*"></ColumnDefinition>
+                                    <ColumnDefinition Width="80*"></ColumnDefinition>
+                                    <ColumnDefinition Width="10*"></ColumnDefinition>
+
                                 </Grid.ColumnDefinitions>
 
-                                <Image Grid.Column="0" Source="ms-appx:///Assets/iconMetro.png"
+                                <Image Grid.Column="0" Source="{Binding Path=Image}"
                                        HorizontalAlignment="Stretch"
                                        VerticalAlignment="Stretch"
                                        Margin="10"></Image>
-                                <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                                
+                                <TextBlock Text="{Binding Path=Name}" Grid.Column="1"
+                                           FontWeight="Bold"></TextBlock>
+
+                                <TextBlock Text="{Binding Path=Distance}" Grid.Column="2"
+                                           ></TextBlock>
                             </Grid> 
                         </DataTemplate>
                     </ListView.ItemTemplate>

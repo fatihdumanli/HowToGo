@@ -98,11 +98,13 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Line.cs" />
     <Compile Include="Model\Stop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Command.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\StopViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>

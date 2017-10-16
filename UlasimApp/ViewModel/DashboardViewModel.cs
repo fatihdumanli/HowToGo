@@ -39,7 +39,7 @@ namespace UlasimApp.ViewModel
         }
         public async void Init()
         {
-           
+            Debug.WriteLine("hello");
         }
 
         private void OnStatusChanged(Geolocator sender, StatusChangedEventArgs args)

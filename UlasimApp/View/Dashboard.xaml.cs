@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using UlasimApp.Services;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -74,15 +75,44 @@ namespace UlasimApp.View
             var distance = slider.Value;
             var stops = await LocationService.Instance.GetNearbyStops(queryHint.Latitude, queryHint.Longitude, distance);
 
-            if(stops != null)
+
+
+            if (stops != null)
             {
+                lstView.Items.Clear();
+
                 foreach (var item in stops)
                 {
-                    lstView.Items.Add(item);
+                    lstView.Items.Add(new UlasimApp.ViewModel.StopViewModel()
+                    {
+                        Distance = 0.2,
+                        IconUri = item.Line.IconUri,
+                        Name = item.Name
+                    });
+
+                    BasicGeoposition pos = new BasicGeoposition();
+                    pos.Longitude = item.Longitude;
+                    pos.Latitude = item.Latitude;
+                    Geopoint point = new Geopoint(pos);
+
+                    MapIcon myPOI = new MapIcon { Location = point, NormalizedAnchorPoint = new Point(0.5, 1.0), Title = item.Name, ZIndex = 0 };
+                    mapcontrol.MapElements.Add(myPOI);
                 }
             }
          
 
+        }
+
+
+        private void GetStopDetails()
+        {
+
+
+        }
+
+        private void lstView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Debug.WriteLine("hello");
         }
     }
 }

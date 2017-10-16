@@ -14,6 +14,8 @@ namespace UlasimApp.API.Controllers
     {
         private UlasimAppAPIContext db = new UlasimAppAPIContext();
 
+
+
         // GET: Lines
         public ActionResult Index()
         {
@@ -32,7 +34,9 @@ namespace UlasimApp.API.Controllers
             {
                 return HttpNotFound();
             }
-            return View(line);
+
+            return Json(line, JsonRequestBehavior.AllowGet);
+
         }
 
         // GET: Lines/Create

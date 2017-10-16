@@ -42,8 +42,21 @@ namespace UlasimApp.Services
             
         }
 
-       
 
+        public async Task<Line> GetLineDetails(int lineId)
+        {
+            using (client)
+            {
+                var res = await client.GetStringAsync(String.Format("/Lines/Details/{0}", lineId));
+                if (res != "[]")
+                {
+                    return JsonConvert.DeserializeObject<Line>(res);
+                }
+            }
+
+            return null;
+
+        }
 
     }
 }

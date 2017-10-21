@@ -15,6 +15,11 @@ namespace UlasimApp.API.Controllers
         private UlasimAppAPIContext db = new UlasimAppAPIContext();
 
 
+        public ActionResult GetLineStops(int id)
+        {
+            var res = db.Stops.Where(s => s.LineId == id).ToList();
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: Lines
         public ActionResult Index()

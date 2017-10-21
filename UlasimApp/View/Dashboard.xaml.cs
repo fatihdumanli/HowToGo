@@ -16,6 +16,8 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using UlasimApp.Services;
 using System.Diagnostics;
+using Windows.UI.Popups;
+using UlasimApp.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -76,7 +78,6 @@ namespace UlasimApp.View
             var stops = await LocationService.Instance.GetNearbyStops(queryHint.Latitude, queryHint.Longitude, distance);
 
 
-
             if (stops != null)
             {
                 lstView.Items.Clear();
@@ -87,7 +88,8 @@ namespace UlasimApp.View
                     {
                         Distance = 0.2,
                         IconUri = item.Line.IconUri,
-                        Name = item.Name
+                        Name = item.Name,
+                        Line = item.Line
                     });
 
                     BasicGeoposition pos = new BasicGeoposition();
@@ -99,8 +101,6 @@ namespace UlasimApp.View
                     mapcontrol.MapElements.Add(myPOI);
                 }
             }
-         
-
         }
 
 
@@ -110,9 +110,12 @@ namespace UlasimApp.View
 
         }
 
-        private void lstView_ItemClick(object sender, ItemClickEventArgs e)
+     
+
+        private async void lstView_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            Debug.WriteLine("hello");
+            MessageDialog md = new MessageDialog("fdsf");
+            await md.ShowAsync();
         }
     }
 }

@@ -100,7 +100,10 @@
     </Compile>
     <Compile Include="Model\Line.cs" />
     <Compile Include="Model\Stop.cs" />
+    <Compile Include="Model\StopSubscription.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\Command.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
@@ -108,6 +111,12 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +126,15 @@
     <None Include="UlasimApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\bg.png" />
+    <Content Include="Assets\details.png" />
+    <Content Include="Assets\dot.png" />
     <Content Include="Assets\iconMetro.png" />
+    <Content Include="Assets\logo.png" />
+    <Content Include="Assets\nearby.png" />
+    <Content Include="Assets\path.png" />
+    <Content Include="Assets\star.png" />
+    <Content Include="Assets\tram.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -137,6 +154,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

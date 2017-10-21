@@ -6,14 +6,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UlasimApp.Model;
+using UlasimApp.Services;
 using UlasimApp.Services.PaymentApp.Windows.Services;
 using Windows.Devices.Geolocation;
+using Windows.UI.Popups;
 
 namespace UlasimApp.ViewModel
 {
     public class DashboardViewModel : ViewModelBase
     {
-      
+
+        private Line _line;
+
+        public Line Line
+        {
+            get
+            {
+                return _line;
+            }
+
+            set
+            {
+                _line = value;
+                base.RaisePropertyChanged(nameof(Line));
+            }
+        }
+        private bool _isPopupOpen;
+
+        public bool IsPopupOpen
+        {
+            get
+            {
+                return _isPopupOpen;
+            }
+
+            set
+            {
+                _isPopupOpen = value;
+                base.RaisePropertyChanged(nameof(IsPopupOpen));
+            }
+        }
+
+        private Command<StopViewModel> _cmdStopClick;
+
+        public Command<StopViewModel> CmdStopClick
+        {
+            get { return _cmdStopClick ?? new Command<StopViewModel>(CmdStopClick2); }
+        }
+
+        private async void CmdStopClick2(StopViewModel o)
+        {
+            IsPopupOpen = true;
+            Line = o.Line;
+        }
 
         private Command _cmdInit;
 
@@ -39,7 +84,7 @@ namespace UlasimApp.ViewModel
         }
         public async void Init()
         {
-            Debug.WriteLine("hello");
+            var user = AccountService.Instance.User;
         }
 
         private void OnStatusChanged(Geolocator sender, StatusChangedEventArgs args)

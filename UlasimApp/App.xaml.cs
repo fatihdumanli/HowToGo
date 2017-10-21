@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UlasimApp.Services;
 using UlasimApp.View;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -73,7 +74,16 @@ namespace UlasimApp
                 Window.Current.Activate();
             }
 
-            rootFrame.Navigate(typeof(Dashboard));
+
+            if(AccountService.Instance.IsLoggedIn)
+            {
+                rootFrame.Navigate(typeof(Dashboard));
+            }
+
+            else
+            {
+                rootFrame.Navigate(typeof(Login));
+            }
         }
 
         /// <summary>

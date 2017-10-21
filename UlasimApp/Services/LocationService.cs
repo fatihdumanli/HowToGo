@@ -58,5 +58,21 @@ namespace UlasimApp.Services
 
         }
 
+
+        public async Task<List<Stop>> GetLineStops(int lineId)
+        {
+            using (client)
+            {
+                var res = await client.GetStringAsync(String.Format("/Lines/GetLineStops/{0}", lineId));
+                if (res != "[]")
+                {
+                    return JsonConvert.DeserializeObject<List<Stop>>(res);
+                }
+            }
+
+            return null;
+
+        }
+
     }
 }

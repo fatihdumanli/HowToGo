@@ -25,16 +25,125 @@
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="How To Go"
+
+        <Popup VerticalOffset="10"
+               HorizontalOffset="50" 
+               x:Name="StandardPopup" 
+               IsOpen="{Binding IsPopupOpen}">
+            <Border BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
+                                Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
+                                BorderThickness="2" Width="500" Height="300">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"></RowDefinition>
+                        <RowDefinition Height="85*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,2">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="50" 
+                                   Source="ms-appx:///Assets/tram.png">
+
+                            </Image>
+                            <TextBlock Text="Line Details" Padding="10"
+                                   FontFamily="Segoe UI Light"
+                                   FontWeight="Bold"
+                                   Margin="5,0,0,0"
+                                   FontSize="22"></TextBlock>
+                        </StackPanel>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"></RowDefinition>
+                            <RowDefinition Height="11*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="15,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                                <ColumnDefinition Width="60*"></ColumnDefinition>
+                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+
+                            <TextBlock Text="{Binding Line.From}"
+                                   Margin="0,10,0,0"
+                                   FontFamily="Segoe UI Light"></TextBlock>
+                            <Image Grid.Column="1" Source="ms-appx:///Assets/path.png"
+                               VerticalAlignment="Top"></Image>
+                            <TextBlock Text="{Binding Line.To}" 
+                                   Margin="0,10,0,0"
+                                   FontFamily="Segoe UI Light"
+                                   Grid.Column="2"></TextBlock>
+
+                        </Grid>
+
+
+                        <ListView Grid.Row="1" ItemsSource="{Binding Line.Stops}" Margin="0,5,0,-0.4">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="30" Source="ms-appx:///Assets/dot.png">
+
+                                        </Image>
+
+                                        <TextBlock
+                                            FontFamily="Segoe UI Light"
+                                            Margin="10,0,0,0"
+                                            Text="{Binding Name}">
+
+
+                                        </TextBlock>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Grid>
+
+
+
+            </Border>
+        </Popup>
+
+
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="41*"></ColumnDefinition>
+                <ColumnDefinition Width="13*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <TextBlock Text="How To Go"
                    FontSize="36"
-                   Margin="10,10,0,0"/>
+                   FontWeight="Bold"
+                   Margin="10,10,0,0" FontFamily="Microsoft JhengHei"/>
+
+            <Image 
+                   Grid.Column="1"
+                   Source="ms-appx:///Assets/star.png" Margin="34,0,16,0"/>
+        </Grid>
+
         <Maps:MapControl x:Name="mapcontrol"
             HorizontalAlignment="Stretch" 
                          Grid.Row="1"
+                         Padding="10"
+                         Margin="10,10,10,10"
                          ZoomLevel="14" Loaded="mapcontrol_Loaded_1"/>
 
 
         <StackPanel Grid.Row="2" Padding="10">
+            <Grid>
+                <TextBlock Text="1 km" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="10 km" HorizontalAlignment="Right"
+                           FontWeight="Bold"></TextBlock>
+            </Grid>
             <Slider x:Name="slider"
                 Minimum="1" Maximum="10" ValueChanged="Slider_ValueChanged"/>
             <TextBlock Text="km"/>
@@ -42,39 +151,67 @@
 
         <Grid Grid.Row="3">
             <StackPanel>
-                <TextBlock Text="Nearby Stops" FontSize="26"
+
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="50" 
+                           Margin="10,10,10,10"
+                           Source="ms-appx:///Assets/nearby.png"></Image>
+                    <TextBlock VerticalAlignment="Center"
+                        Text="Nearby Stops" FontSize="26"
                        Padding="10"/>
-                <ListView x:Name="lstView" ItemClick="lstView_ItemClick">
+                </StackPanel>
+              
+                <ListView x:Name="lstView">
+
+
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Interactivity:Interaction.Behaviors>
-                                    <Core:EventTriggerBehavior EventName="Tapped">
-                                        <Core:InvokeCommandAction Command="{Binding CmdInit}"/>
-                                    </Core:EventTriggerBehavior>
-                                </Interactivity:Interaction.Behaviors>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="10*"></ColumnDefinition>
-                                    <ColumnDefinition Width="80*"></ColumnDefinition>
+                                    <ColumnDefinition Width="70*"></ColumnDefinition>
                                     <ColumnDefinition Width="10*"></ColumnDefinition>
-
+                                    <ColumnDefinition Width="10*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Column="0" Source="{Binding Path=Image}"
                                        HorizontalAlignment="Stretch"
                                        VerticalAlignment="Stretch"
+                                       Width="50"
                                        Margin="10"></Image>
-                                
+
                                 <TextBlock Text="{Binding Path=Name}" Grid.Column="1"
+                                           VerticalAlignment="Center"
                                            FontWeight="Bold"></TextBlock>
 
                                 <TextBlock Text="{Binding Path=Distance}" Grid.Column="2"
+                                           VerticalAlignment="Center"
+                                           Margin="10,0,0,0"
                                            ></TextBlock>
-                            </Grid> 
+
+
+                                <Image Width="40"
+                                       Grid.Column="3"
+                                       Margin="10,0,0,0"
+                                    Source="ms-appx:///Assets/details.png">
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="Tapped">
+                                            <Core:InvokeCommandAction Command="{Binding CmdStopClick, Mode=OneWay, Source={StaticResource dashboardVm}}" 
+                                        CommandParameter="{Binding}"/>
+                                        </Core:EventTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
+
+                                </Image>
+
+                            </Grid>
+
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
+
+
 
         </Grid>
 

@@ -13,5 +13,8 @@ namespace UlasimApp.API.Models
         public string IconUri { get; set; }
         public int FromId { get; set; }
         public int ToId { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+
     }
 }

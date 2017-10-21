@@ -11,8 +11,6 @@ namespace UlasimApp.Model
     {
         public int Id { get; set; }
         public int LineId { get; set; }
-        public string From { get; set; }
-        public string To { get; set; }
         public string Name { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
@@ -27,3 +25,5 @@ namespace UlasimApp.Model
 
     }
 }
+
+

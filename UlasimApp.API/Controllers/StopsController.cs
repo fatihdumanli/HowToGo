@@ -27,11 +27,30 @@ namespace UlasimApp.API.Controllers
                 }
             }
 
-
             return Json(properStops, JsonRequestBehavior.AllowGet);   
-
         }
+
         
+        [HttpPost]
+        public ActionResult PostStopSubscription(int userid, int stopid)
+        {
+            StopSubscription s = new StopSubscription()
+            {
+                StopId = stopid,
+                UserId = userid
+            };
+
+            db.StopSubscriptions.Add(s);
+            db.SaveChanges();
+
+            return Json("ok");
+        }
+
+        public ActionResult GetUserSubscriptions(int userid)
+        {
+            var res = db.StopSubscriptions.Where(s => s.UserId == userid).ToList();
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
 
 
     }

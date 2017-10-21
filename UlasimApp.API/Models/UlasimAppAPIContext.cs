@@ -21,6 +21,8 @@ namespace UlasimApp.API.Models
 
         public System.Data.Entity.DbSet<UlasimApp.API.Models.Line> Lines { get; set; }
         public System.Data.Entity.DbSet<UlasimApp.API.Models.Stop> Stops { get; set; }
+        public System.Data.Entity.DbSet<UlasimApp.API.Models.User> Users { get; set; }
+        public System.Data.Entity.DbSet<UlasimApp.API.Models.StopSubscription> StopSubscriptions { get; set; }
 
     }
 }
